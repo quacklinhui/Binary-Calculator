@@ -29,3 +29,5 @@ Number button – display
 Operation button
 -	Primary operation + - x / 
 -	Secondary operation shift+ shift – 
+
+Each Subclass need to define which button on the keyboard triggers the button on the calculator
