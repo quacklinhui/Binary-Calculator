@@ -21,3 +21,11 @@ onPress();
 display;
 performOperation();
 }
+
+
+Calculator class has buttons, holds value. Array stores decimal, convert to binary when returning. 
+Superclass Buttons – press, mouseover color change of cell
+Number button – display 
+Operation button
+-	Primary operation + - x / 
+-	Secondary operation shift+ shift – 
