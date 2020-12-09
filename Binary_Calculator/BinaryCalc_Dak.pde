@@ -96,7 +96,9 @@ void display() {
   translate(-500,-500);
   if (decimalPoint == false){
     textSize(60);
+    //calc display
     text(value, 125, 200);
+    //operator display
     if (operator != null){
       if (operator == "plus"){
         textSize(40);
@@ -121,7 +123,9 @@ void display() {
   }
   else { //if it is a positive number with decimal place
     stringValue= Integer.toString(value)+"."+Integer.toString(decimalValue);
+    //calc display
     text(stringValue, 125, 200);
+    //operator display
     if (operator != null) {
       if (operator == "plus"){
         textSize(40);
@@ -146,7 +150,7 @@ void display() {
   }
 }  
 
-
+//mouseclick functions
 void mouseClicked(){
   if (mouseButton == LEFT) {
     if (mouseX>80 && mouseX<180 && mouseY>250 && mouseY<350) { //if the mouse clicks on "1"
@@ -180,7 +184,7 @@ void mouseClicked(){
       base10Sum = convertBase10(value);
       value = 0;
       
-    } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {///
+    } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {// /
       operator = "divide";
       base10Sum = convertBase10(value);
       value = 0;
@@ -218,6 +222,7 @@ void mouseClicked(){
         }
     }
   
+  //special functions shift x /
   } else if (mouseButton == RIGHT) {
     if (mouseX>330 && mouseX<430 && mouseY>375 && mouseY<475) { // shift x
       operator = "power";
@@ -229,11 +234,11 @@ void mouseClicked(){
       base10Sum = convertBase10(value);
       value = 0;
     }
-  }   
-    
+  }     
 } //end of mouseClicked
   
 
+//keyboard functions
 void keyPressed(){
     switch(key){
     case 'q': //"1" button
