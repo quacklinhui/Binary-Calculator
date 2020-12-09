@@ -172,30 +172,8 @@ void keyPressed(){
       resetAllValues();
       break;     
     case 'c': // = button
-        switch(operator){
-          case "plus":
-            decimalPoint = false;
-            base10Sum += convertBase10(value);
-            value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-            break;
-         case "minus":
-            decimalPoint = false;
-            base10Sum -= convertBase10(value);
-            value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-            break;
-         case "times":
-            decimalPoint = false;
-            base10Sum *= convertBase10(value);
-            value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-            break;
-        case "divide":
-            decimalPoint = false;
-            base10Sum /= convertBase10(value);
-            value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-            break;
-        }
+      processOperation();
       break;
-      
     default:
       break;
    }
@@ -215,4 +193,46 @@ int convertBase10(int binary){
        }  
     }  
     return decimal;  
-}  
+}
+
+void plusOperator(){
+  decimalPoint = false;
+  base10Sum += convertBase10(value);
+  value = Integer.parseInt(Integer.toBinaryString(base10Sum));
+}
+
+void minusOperator(){
+    decimalPoint = false;
+    base10Sum -= convertBase10(value);
+    value = Integer.parseInt(Integer.toBinaryString(base10Sum));
+}
+
+void divideOperator(){
+   decimalPoint = false;
+   base10Sum /= convertBase10(value);
+   value = Integer.parseInt(Integer.toBinaryString(base10Sum));
+}
+
+void timesOperator(){
+    decimalPoint = false;
+    base10Sum *= convertBase10(value);
+    value = Integer.parseInt(Integer.toBinaryString(base10Sum));
+}
+
+void processOperation(){
+   switch(operator){
+          case "plus":
+            plusOperator();
+            break;
+         case "minus":
+            minusOperator();
+            break;
+         case "times":
+            timesOperator();
+            break;
+        case "divide":
+            divideOperator();
+            break;
+        }
+
+}
