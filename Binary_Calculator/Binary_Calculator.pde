@@ -52,8 +52,20 @@ void calUI(){
 
 //global variables
 int value = 0;
-int decimalSum = 0;
+int decimalValue= 0;
+int base10Sum = 0;
+int decimalbase10Sum = 0;
 String operator;
+String stringValue;
+
+void resetAllValues(){
+  value = 0;
+  decimalValue= 0;
+  base10Sum = 0;
+  decimalbase10Sum = 0;
+  operator=null;
+  stringValue=null;
+}
 
 void setup(){
   //size of frame
@@ -77,7 +89,13 @@ void display() {
   fill(0);
   rotate(PI/2);
   translate(-500,-500);
-  text(value, 125, 200);
+  if (decimalValue == 0){
+    text(value, 125, 200);
+  }
+  else if (base10Sum>=0){ //if it is a positive number with decimal place
+    stringValue= Integer.toString(value)+'.'+Integer.toString(decimalValue);
+  }
+  
 }    
 
 void mouseClicked(){
@@ -103,49 +121,47 @@ void keyPressed(){
       break;
     case 'a': //+ button
       operator = "plus";
-      decimalSum = convertBase10(value);
+      base10Sum = convertBase10(value);
       value = 0;
       break;
     case 's': //- button
       operator = "minus";
-      decimalSum = convertBase10(value);
+      base10Sum = convertBase10(value);
       value = 0;
       break;
     case 'd': //x button
       operator = "times";
-      decimalSum = convertBase10(value);
+      base10Sum = convertBase10(value);
       value = 0;
       break;
     case 'z': // / button
       operator = "divide";
-      decimalSum = convertBase10(value);
+      base10Sum = convertBase10(value);
       value = 0;
       break;
     case 'x': // decimal button
       break;
     case 'E':
-      value = 0;
-      decimalSum = 0;
-      operator=null;
+      resetAllValues();
       break;
       
     case 'c': // = button
         switch(operator){
           case "plus":
-            decimalSum += convertBase10(value);
-            value = Integer.parseInt(Integer.toBinaryString(decimalSum));
+            base10Sum += convertBase10(value);
+            value = Integer.parseInt(Integer.toBinaryString(base10Sum));
             break;
          case "minus":
-            decimalSum -= convertBase10(value);
-            value = Integer.parseInt(Integer.toBinaryString(decimalSum));
+            base10Sum -= convertBase10(value);
+            value = Integer.parseInt(Integer.toBinaryString(base10Sum));
             break;
          case "times":
-            decimalSum *= convertBase10(value);
-            value = Integer.parseInt(Integer.toBinaryString(decimalSum));
+            base10Sum *= convertBase10(value);
+            value = Integer.parseInt(Integer.toBinaryString(base10Sum));
             break;
         case "divide":
-            decimalSum /= convertBase10(value);
-            value = Integer.parseInt(Integer.toBinaryString(decimalSum));
+            base10Sum /= convertBase10(value);
+            value = Integer.parseInt(Integer.toBinaryString(base10Sum));
             break;
         }
       break;
