@@ -57,6 +57,7 @@ int base10Sum = 0;
 int decimalbase10Sum = 0;
 String operator;
 String stringValue;
+boolean decimalPoint = false;
 
 void resetAllValues(){
   value = 0;
@@ -65,6 +66,7 @@ void resetAllValues(){
   decimalbase10Sum = 0;
   operator=null;
   stringValue=null;
+  decimalPoint=false; //showing whether the current input should be after the decimal or before
 }
 
 void setup(){
@@ -89,11 +91,12 @@ void display() {
   fill(0);
   rotate(PI/2);
   translate(-500,-500);
-  if (decimalValue == 0){
+  if (decimalPoint ==false){
     text(value, 125, 200);
   }
-  else if (base10Sum>=0){ //if it is a positive number with decimal place
-    stringValue= Integer.toString(value)+'.'+Integer.toString(decimalValue);
+  else { //if it is a positive number with decimal place
+    stringValue= Integer.toString(value)+"."+Integer.toString(decimalValue);
+    text(stringValue, 125, 200);
   }
   
 }    
@@ -111,13 +114,31 @@ void mouseClicked(){
 void keyPressed(){
     switch(key){
     case 'q': //"1" button
-      value = value*10+1;
-      break;
-    case 'w': //"0" button
-      value=value*10;
+      if (decimalPoint==false){
+        value = value*10+1;
+      }
+      else{
+        decimalValue = decimalValue*10+1;
+      }
+        break;
+      case 'w': //"0" button
+      if (decimalPoint==false){
+        value=value*10;
+      }
+      else{
+        decimalValue = decimalValue*10;
+      }
       break;
     case 'e': //del button
-      value = value/10;
+      if (decimalPoint==false){
+        value=value/10;
+      }
+      else if (decimalValue==0){
+        decimalPoint = false;
+      }
+      else {
+        decimalValue = decimalValue/10;
+      }
       break;
     case 'a': //+ button
       operator = "plus";
@@ -140,31 +161,41 @@ void keyPressed(){
       value = 0;
       break;
     case 'x': // decimal button
+      if (decimalPoint ==false){
+        decimalPoint=true;
+      }
+      else {
+        decimalPoint = false;
+      } 
       break;
-    case 'E':
+    case 'E': //reset option
       resetAllValues();
-      break;
-      
+      break;     
     case 'c': // = button
         switch(operator){
           case "plus":
+            decimalPoint = false;
             base10Sum += convertBase10(value);
             value = Integer.parseInt(Integer.toBinaryString(base10Sum));
             break;
          case "minus":
+            decimalPoint = false;
             base10Sum -= convertBase10(value);
             value = Integer.parseInt(Integer.toBinaryString(base10Sum));
             break;
          case "times":
+            decimalPoint = false;
             base10Sum *= convertBase10(value);
             value = Integer.parseInt(Integer.toBinaryString(base10Sum));
             break;
         case "divide":
+            decimalPoint = false;
             base10Sum /= convertBase10(value);
             value = Integer.parseInt(Integer.toBinaryString(base10Sum));
             break;
         }
       break;
+      
     default:
       break;
    }
