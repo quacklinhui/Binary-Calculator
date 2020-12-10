@@ -45,16 +45,16 @@ void calUI(){
   text("1", 115, 320);
   text("0", 240, 320);
   text("del", 340, 320);
-  text("+", 115, 440);
+  text("+", 110, 440);
   text("-", 240, 440);
-  text("x", 360, 440);
+  text("x", 365, 440);
   text("/", 115, 565);
-  text(".", 240, 565);
+  text(".", 248, 560);
   text("=", 360, 565);
   //rotate for shift 
   translate(500,500);
   rotate(-PI/2);
-  text("shift", 0, 0);
+  text("shift", 10, 10);
 }
 
 //global variables
@@ -81,7 +81,7 @@ void setup(){
   //size of frame
   size(600, 700);
   background(backgroundc);
-  textSize(50);
+  //textSize(50);
 }
 
 void draw(){
@@ -100,26 +100,28 @@ void display() {
   rotate(PI/2);
   translate(-500,-500);
   if (decimalPoint == false && decimalValue==0){
+    //calculator main display
     textSize(60);
     text(value, 125, 200);
     if (operator != null){
+      //operation display
       if (operator == "plus"){
         textSize(40);
-        text("+", 420, 140);
+        text("+", 425, 140);
       } else if (operator == "minus"){
         textSize(40);
-        text("-", 420, 140);
+        text("-", 428, 140);
       } else if (operator == "times"){
         textSize(40);
-        text("x", 420, 140);
+        text("x", 428, 140);
       } else if (operator == "divide") {
         textSize(40);
-        text("/", 420, 140);
+        text("/", 428, 140);
       } else if (operator == "power") {
-        textSize(40);
+        textSize(30);
         text("^2", 420, 140);
       } else if (operator == "root") {
-        textSize(40);
+        textSize(30);
         text("^0.5", 420, 140);
       }
     }
@@ -141,10 +143,10 @@ void display() {
         textSize(40);
         text("/", 420, 140);
       } else if (operator == "power") {
-        textSize(40);
+        textSize(30);
         text("^2", 420, 140);
       } else if (operator == "root") {
-        textSize(40);
+        textSize(30);
         text("^0.5", 420, 140);
       }
     }
@@ -153,37 +155,36 @@ void display() {
 
 //performs functions on mouse click
 void mouseClicked(){
-    if (mouseX>80 && mouseX<180 && mouseY>250 && mouseY<350) { //if the mouse clicks on "1"
-      oneButton();
-    }else if(mouseX>205 && mouseX<305 && mouseY>250 && mouseY<350){ //if the mouse clicks on "0"
-      zeroButton();
-    }else if (mouseX>330 && mouseX<430 && mouseY>250 && mouseY<350){ //del
-      deleteButton();
-    }else if (mouseX>80 && mouseX<180 && mouseY>375 && mouseY<475) { //+
-      operator="plus";
-      operationButton();
-    } else if (mouseX>205 && mouseX<305 && mouseY>375 && mouseY<475) { //-
-      operator="minus";
-      operationButton();
-    } else if (mouseX>330 && mouseX<430 && mouseY>375 && mouseY<475) { //x
-      operator="times";
-      operationButton();
-    } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {///
-      operator="divide";
-      operationButton();
-    } else if (mouseX>205 && mouseX<305 && mouseY>500 && mouseY<600) {// decimal
-      decimalButton();
-    } else if (mouseX>330 && mouseX<430 && mouseY>500 && mouseY<600) {//equal
-      equalButton();  
+    if (mouseButton == LEFT) {
+      if (mouseX>80 && mouseX<180 && mouseY>250 && mouseY<350) { //if the mouse clicks on "1"
+        oneButton();
+      } else if(mouseX>205 && mouseX<305 && mouseY>250 && mouseY<350){ //if the mouse clicks on "0"
+        zeroButton();
+      } else if (mouseX>330 && mouseX<430 && mouseY>250 && mouseY<350){ //del
+        deleteButton();
+      } else if (mouseX>80 && mouseX<180 && mouseY>375 && mouseY<475) { //+
+        plusButton();
+      } else if (mouseX>205 && mouseX<305 && mouseY>375 && mouseY<475) { //-
+        minusButton();
+      } else if (mouseX>330 && mouseX<430 && mouseY>375 && mouseY<475) { //x
+        timesButton();
+      } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {///
+        divideButton();
+      } else if (mouseX>205 && mouseX<305 && mouseY>500 && mouseY<600) {// decimal
+        decimalButton();
+      } else if (mouseX>330 && mouseX<430 && mouseY>500 && mouseY<600) {//equal
+        equalButton();
+      }
+    //special functions shift x /
     } else if (mouseButton == RIGHT) {
-        if (mouseX>330 && mouseX<430 && mouseY>375 && mouseY<475) { // shift x
-      powerButton();
-    } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {// shift /
-       rootButton();
-    }
+      if (mouseX>330 && mouseX<430 && mouseY>375 && mouseY<475) { // shift x
+        powerButton();
+      } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {// shift /
+        rootButton();
+      }
     }
 }
-  
+
 //triggers the various functions when the corresponding keys are pressed
 void keyPressed(){
     switch(key){
@@ -197,20 +198,16 @@ void keyPressed(){
         deleteButton();
         break;
       case 'a': //+ button
-        operator="plus";
-        operationButton();
+        plusButton();
         break;
       case 's': //- button
-        operator="minus";
-        operationButton();
+        minusButton();
         break;
       case 'd': //x button
-        operator="times";
-        operationButton();
+        timesButton();
         break;
       case 'z': // / button
-        operator="divide";
-        operationButton();
+        divideButton();
         break;
       case 'x': // decimal button
         decimalButton();
@@ -277,12 +274,14 @@ void timesOperator(){
     value = Integer.parseInt(Integer.toBinaryString(base10Sum));
 }
 
+//power 2 of input value
 void powerOperator(){
     decimalPoint = false;
     base10Sum = convertBase10(int(pow(value,2)));
     value = Integer.parseInt(Integer.toBinaryString(base10Sum));
 }
 
+//square root of input value
 void rootOperator(){
     decimalPoint = false;
     base10Sum = convertBase10(int(pow(value,0.5)));
@@ -292,7 +291,7 @@ void rootOperator(){
 //updates the value based on which operation was performed
 void equalButton(){
    switch(operator){
-          case "plus":
+         case "plus":
             plusOperator();
             break;
          case "minus":
@@ -311,8 +310,6 @@ void equalButton(){
             rootOperator();
             break;
         default:
-            decimalPoint=false;
-            operator="";
             break;
         }
 }
@@ -350,8 +347,40 @@ void zeroButton(){
   }
 }
 
-//initialises the values for an operation to occur
-void operationButton(){
+//initialises the values for an addition
+void plusButton(){
+  operator = "plus";
+  base10Sum = convertBase10(value);
+  decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
+  value = 0;
+  decimalValue = 0;
+  decimalPoint=false;
+  
+}
+
+//initialises the values for a substraction
+void minusButton(){
+      operator = "minus";
+      base10Sum = convertBase10(value);
+      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
+      value = 0;
+      decimalValue = 0;
+      decimalPoint=false;
+}
+
+//initialises the values for an division
+void divideButton(){
+      operator = "divide";
+      base10Sum = convertBase10(value);
+      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
+      value = 0;
+      decimalValue = 0;
+      decimalPoint=false;
+}
+
+//initialises the values for an multiplication
+void timesButton(){
+      operator = "times";
       base10Sum = convertBase10(value);
       decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
       value = 0;
@@ -372,28 +401,24 @@ void decimalButton(){
 void powerButton(){
     operator = "power";
     base10Sum = convertBase10(value);
-    value = 0;
+    //value = 0;
 }
 
 void rootButton(){
   operator = "root";
   base10Sum = convertBase10(value);
-  value = 0;
+  //value = 0;
 }
 
 //converts the fraction from binary to base10
 float decimalPlaceBinaryToBase10(int decimalValue){
     float decimalbase10Sum = 0;  
       int len = String.valueOf(decimalValue).length(); 
-      while(true){  
-        if(decimalValue == 0){  
-          break;  
-        } else {  
+      while(decimalValue!=0){   
             int temp = decimalValue%10;  
             decimalbase10Sum += temp*Math.pow(2, (len*-1));  
             decimalValue = decimalValue/10;  
             len--;  
-         }  
       }
       return decimalbase10Sum;
 }
@@ -416,5 +441,4 @@ void decimalPlaceBase10toBinary(float decimalBase10Sum){
         }
       }
       decimalValue = Integer.parseInt(binaryString);
-  //return decimalValue; //returns the binary decimal value
 }
