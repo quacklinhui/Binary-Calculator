@@ -245,7 +245,7 @@ void plusOperator(){
     decimalbase10Sum-=1;
   }
   value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-  decimalValue = decimalPlaceBase10toBinary(decimalbase10Sum);
+  //decimalValue = decimalPlaceBase10toBinary(decimalbase10Sum);
 }
 
 //substracts numbers
@@ -421,7 +421,7 @@ float decimalPlaceBinaryToBase10(int decimalValue){
 }
 
 //converts the fraction from base 10 to binary
-int decimalPlaceBase10toBinary(float decimalBase10Sum){
+void decimalPlaceBase10toBinary(float decimalBase10Sum){
   int stringLength=0;
   String binaryString="";
   float temp = decimalBase10Sum;
@@ -438,5 +438,5 @@ int decimalPlaceBase10toBinary(float decimalBase10Sum){
         }
       }
       decimalValue = Integer.parseInt(binaryString);
-  return decimalValue; //returns the binary decimal value
+  //return decimalValue; //returns the binary decimal value
 }
