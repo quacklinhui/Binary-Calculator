@@ -1,5 +1,5 @@
 /**
-*This program is a binary calculator that collects binary number input and outputs the corresponding binary number output .
+*This program is a binary calculator that collects binary number input and outputs the corresponding binary number output.
 */
 
 
@@ -10,6 +10,7 @@ color buttontextc = color(255,255,255);
 color shiftc = color(219, 144, 119);
 color displayc = color(232,234,245);
 color calcc = color(225, 225, 229);
+
 //UI of the calculator
 void calUI(){
   background(backgroundc);
@@ -60,7 +61,7 @@ void calUI(){
 int value = 0;
 int decimalValue= 0;
 int base10Sum = 0;
-int decimalbase10Sum = 0;
+float decimalbase10Sum = 0;
 String operator;
 String stringValue;
 boolean decimalPoint = false;
@@ -93,7 +94,7 @@ void draw(){
   }
 }
 
-/*Shows the display of the updated value*/
+//shows the display of the updated value
 void display() {
   fill(0);
   rotate(PI/2);
@@ -153,7 +154,7 @@ void display() {
 //performs functions on mouse click
 void mouseClicked(){
     if (mouseX>80 && mouseX<180 && mouseY>250 && mouseY<350) { //if the mouse clicks on "1"
-       oneButton();
+      oneButton();
     }else if(mouseX>205 && mouseX<305 && mouseY>250 && mouseY<350){ //if the mouse clicks on "0"
       zeroButton();
     }else if (mouseX>330 && mouseX<430 && mouseY>250 && mouseY<350){ //del
@@ -238,7 +239,13 @@ int convertBase10(int binary){
 void plusOperator(){
   decimalPoint = false;
   base10Sum += convertBase10(value);
+  decimalbase10Sum += decimalPlaceBinaryToBase10(decimalValue);
+  if (decimalbase10Sum>1){
+    base10Sum++;
+    decimalbase10Sum-=1;
+  }
   value = Integer.parseInt(Integer.toBinaryString(base10Sum));
+  decimalValue = decimalPlaceBase10toBinary(decimalbase10Sum);
 }
 
 //substracts numbers
@@ -262,6 +269,18 @@ void timesOperator(){
     value = Integer.parseInt(Integer.toBinaryString(base10Sum));
 }
 
+void powerOperator(){
+    decimalPoint = false;
+    base10Sum = convertBase10(int(pow(value,2)));
+    value = Integer.parseInt(Integer.toBinaryString(base10Sum));
+}
+
+void rootOperator(){
+    decimalPoint = false;
+    base10Sum = convertBase10(int(pow(value,0.5)));
+    value = Integer.parseInt(Integer.toBinaryString(base10Sum));
+}
+
 //updates the value based on which operation was performed
 void equalButton(){
    switch(operator){
@@ -277,11 +296,15 @@ void equalButton(){
         case "divide":
             divideOperator();
             break;
+        case "power":
+            powerOperator();
+            break;
+        case "root":
+            rootOperator();
+            break;
         default:
-            divideOperator();
             break;
         }
-
 }
 
 //deletes the right most value of the number
@@ -321,28 +344,41 @@ void zeroButton(){
 void plusButton(){
   operator = "plus";
   base10Sum = convertBase10(value);
+  decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
   value = 0;
+  decimalValue = 0;
+  decimalPoint=false;
+  
 }
 
 //initialises the values for a substraction
 void minusButton(){
       operator = "minus";
       base10Sum = convertBase10(value);
+      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
       value = 0;
+      decimalValue = 0;
+      decimalPoint=false;
 }
 
 //initialises the values for an division
 void divideButton(){
       operator = "divide";
       base10Sum = convertBase10(value);
+      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
       value = 0;
+      decimalValue = 0;
+      decimalPoint=false;
 }
 
 //initialises the values for an multiplication
 void timesButton(){
       operator = "times";
       base10Sum = convertBase10(value);
+      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
       value = 0;
+      decimalValue = 0;
+      decimalPoint=false;
 }
 
 //initialises the values to include a decimal place
@@ -365,4 +401,42 @@ void rootButton(){
   operator = "root";
   base10Sum = convertBase10(value);
   value = 0;
+}
+
+//converts the fraction from binary to base10
+float decimalPlaceBinaryToBase10(int decimalValue){
+    float decimalbase10Sum = 0;  
+      int len = String.valueOf(decimalValue).length(); 
+      while(true){  
+        if(decimalValue == 0){  
+          break;  
+        } else {  
+            int temp = decimalValue%10;  
+            decimalbase10Sum += temp*Math.pow(2, (len*-1));  
+            decimalValue = decimalValue/10;  
+            len--;  
+         }  
+      }
+      return decimalbase10Sum;
+}
+
+//converts the fraction from base 10 to binary
+int decimalPlaceBase10toBinary(float decimalBase10Sum){
+  int stringLength=0;
+  String binaryString="";
+  float temp = decimalBase10Sum;
+    while (temp!=0 && stringLength<4){
+        temp*=2;
+        if (temp>=1){    
+          binaryString=binaryString+"1";
+          stringLength++;
+          temp-=1;
+        }
+        else {
+          binaryString=binaryString+"0";
+         stringLength++;
+        }
+      }
+      decimalValue = Integer.parseInt(binaryString);
+  return decimalValue; //returns the binary decimal value
 }
