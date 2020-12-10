@@ -3,13 +3,16 @@ void plusOperator(){
   decimalPoint = false;
   base10Sum += convertBase10(value);
   decimalbase10Sum += decimalPlaceBinaryToBase10(decimalValue);
-  if (decimalbase10Sum>1){
+  if (decimalbase10Sum>=1){
     base10Sum++;
-    decimalbase10Sum-=1;
+    decimalbase10Sum--;
   }
   value = Integer.parseInt(Integer.toBinaryString(base10Sum));
   if (decimalbase10Sum!=0){
-    decimalValue=decimalPlaceBase10toBinary(decimalbase10Sum); //this is still causing issues when the decimal place is not involved
+    decimalValue=decimalPlaceBase10toBinary(decimalbase10Sum);
+  }
+  else{
+    decimalValue=0;
   }
 } 
 
