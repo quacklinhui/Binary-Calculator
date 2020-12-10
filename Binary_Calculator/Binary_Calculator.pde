@@ -7,7 +7,7 @@ int value = 0;
 int decimalValue= 0;
 int base10Sum = 0;
 float decimalbase10Sum = 0;
-String operator;
+String operator="";
 String stringValue;
 boolean decimalPoint = false;
 
