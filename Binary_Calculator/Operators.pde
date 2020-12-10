@@ -16,11 +16,22 @@ void plusOperator(){
   }
 } 
 
-//substracts numbers
+//substracts the numbers
 void minusOperator(){
-    decimalPoint = false;
-    base10Sum -= convertBase10(value);
-    value = Integer.parseInt(Integer.toBinaryString(base10Sum));
+  decimalPoint = false;
+  base10Sum -= convertBase10(value);
+  decimalbase10Sum -= decimalPlaceBinaryToBase10(decimalValue);
+  if (decimalbase10Sum<0){
+    base10Sum--;
+    decimalbase10Sum++;
+  }
+  value = Integer.parseInt(Integer.toBinaryString(base10Sum));
+  if (decimalbase10Sum!=0){
+    decimalValue=decimalPlaceBase10toBinary(decimalbase10Sum);
+  }
+  else{
+    decimalValue=0;
+  }
 }
 
 //divides numbers
