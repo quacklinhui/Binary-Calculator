@@ -245,7 +245,7 @@ void plusOperator(){
     decimalbase10Sum-=1;
   }
   value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-  //decimalValue = decimalPlaceBase10toBinary(decimalbase10Sum);
+  decimalPlaceBase10toBinary(decimalbase10Sum);
 }
 
 //substracts numbers
