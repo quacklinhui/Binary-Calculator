@@ -160,13 +160,17 @@ void mouseClicked(){
     }else if (mouseX>330 && mouseX<430 && mouseY>250 && mouseY<350){ //del
       deleteButton();
     }else if (mouseX>80 && mouseX<180 && mouseY>375 && mouseY<475) { //+
-      plusButton();
+      operator="plus";
+      operationButton();
     } else if (mouseX>205 && mouseX<305 && mouseY>375 && mouseY<475) { //-
-      minusButton();
+      operator="minus";
+      operationButton();
     } else if (mouseX>330 && mouseX<430 && mouseY>375 && mouseY<475) { //x
-      timesButton();
+      operator="times";
+      operationButton();
     } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {///
-      divideButton();
+      operator="divide";
+      operationButton();
     } else if (mouseX>205 && mouseX<305 && mouseY>500 && mouseY<600) {// decimal
       decimalButton();
     } else if (mouseX>330 && mouseX<430 && mouseY>500 && mouseY<600) {//equal
@@ -193,16 +197,20 @@ void keyPressed(){
         deleteButton();
         break;
       case 'a': //+ button
-        plusButton();
+        operator="plus";
+        operationButton();
         break;
       case 's': //- button
-        minusButton();
+        operator="minus";
+        operationButton();
         break;
       case 'd': //x button
-        timesButton();
+        operator="times";
+        operationButton();
         break;
       case 'z': // / button
-        divideButton();
+        operator="divide";
+        operationButton();
         break;
       case 'x': // decimal button
         decimalButton();
@@ -303,6 +311,8 @@ void equalButton(){
             rootOperator();
             break;
         default:
+            decimalPoint=false;
+            operator="";
             break;
         }
 }
@@ -340,40 +350,8 @@ void zeroButton(){
   }
 }
 
-//initialises the values for an addition
-void plusButton(){
-  operator = "plus";
-  base10Sum = convertBase10(value);
-  decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
-  value = 0;
-  decimalValue = 0;
-  decimalPoint=false;
-  
-}
-
-//initialises the values for a substraction
-void minusButton(){
-      operator = "minus";
-      base10Sum = convertBase10(value);
-      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
-      value = 0;
-      decimalValue = 0;
-      decimalPoint=false;
-}
-
-//initialises the values for an division
-void divideButton(){
-      operator = "divide";
-      base10Sum = convertBase10(value);
-      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
-      value = 0;
-      decimalValue = 0;
-      decimalPoint=false;
-}
-
-//initialises the values for an multiplication
-void timesButton(){
-      operator = "times";
+//initialises the values for an operation to occur
+void operationButton(){
       base10Sum = convertBase10(value);
       decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
       value = 0;
