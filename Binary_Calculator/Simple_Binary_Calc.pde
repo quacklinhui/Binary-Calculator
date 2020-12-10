@@ -401,13 +401,13 @@ void decimalButton(){
 void powerButton(){
     operator = "power";
     base10Sum = convertBase10(value);
-    value = 0;
+    //value = 0;
 }
 
 void rootButton(){
   operator = "root";
   base10Sum = convertBase10(value);
-  value = 0;
+  //value = 0;
 }
 
 //converts the fraction from binary to base10
