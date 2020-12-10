@@ -1,4 +1,3 @@
-
 //setting different colours of calculator
 color backgroundc = color(204, 215, 250);
 color buttonc = color(89, 128, 252);
@@ -27,7 +26,7 @@ void calUI(){
   rect(130, 425, 100, 100);
   rect(255, 425, 100, 100);
   rect(380, 425, 100, 100);
-  //row 3 - /, %, =
+  //row 3 - /, ., =
   rect(130, 550, 100, 100);
   rect(255, 550, 100, 100);
   rect(380, 550, 100, 100);
@@ -47,8 +46,15 @@ void calUI(){
   text("/", 115, 565);
   text(".", 248, 560);
   text("=", 360, 565);
-  //rotate for shift 
+  //special functions
+  textSize(20);
+  text("(^2)", 385, 400);
+  text("(^0.5)", 120, 523);
+  text("clear", 380, 270);
+  //rotate for shift
+  textSize(50);
   translate(500,500);
   rotate(-PI/2);
   text("shift", 10, 10);
+  
 }

@@ -1,5 +1,6 @@
 /**
 *This program is a binary calculator that collects binary number input and outputs the corresponding binary number output.
+*Note that the program only supports addition and substraction for inputs with decimal places
 */
 
 //global variables
@@ -8,7 +9,7 @@ int decimalValue= 0;
 int base10Sum = 0;
 float decimalbase10Sum = 0;
 String operator="";
-String stringValue;
+String stringValue=null;
 boolean decimalPoint = false;
 
 //resets all global variables to their initial configuration
@@ -50,13 +51,17 @@ void mouseClicked(){
       } else if (mouseX>330 && mouseX<430 && mouseY>250 && mouseY<350){ //del
         deleteButton();
       } else if (mouseX>80 && mouseX<180 && mouseY>375 && mouseY<475) { //+
-        plusButton();
+        operator = "plus";
+        operatorButton();
       } else if (mouseX>205 && mouseX<305 && mouseY>375 && mouseY<475) { //-
-        minusButton();
+        operator = "minus";
+        operatorButton();
       } else if (mouseX>330 && mouseX<430 && mouseY>375 && mouseY<475) { //x
-        timesButton();
+        operator = "times";
+        operatorButton();
       } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {///
-        divideButton();
+        operator = "divide";
+        operatorButton();
       } else if (mouseX>205 && mouseX<305 && mouseY>500 && mouseY<600) {// decimal
         decimalButton();
       } else if (mouseX>330 && mouseX<430 && mouseY>500 && mouseY<600) {//equal
@@ -69,11 +74,14 @@ void mouseClicked(){
       } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {// shift /
         rootButton();
       }
+      else if (mouseX>330 && mouseX<430 && mouseY>250 && mouseY<350) {// clear button
+        resetAllValues();
+      }
     }
 }
 
 //triggers the various functions when the corresponding keys are pressed
-void keyPressed(){
+void keyReleased(){
     switch(key){
       case 'q': //"1" button
         oneButton();
@@ -85,16 +93,20 @@ void keyPressed(){
         deleteButton();
         break;
       case 'a': //+ button
-        plusButton();
+        operator = "plus";
+        operatorButton();
         break;
       case 's': //- button
-        minusButton();
+        operator = "minus";
+        operatorButton();
         break;
       case 'd': //x button
-        timesButton();
+        operator = "times";
+        operatorButton();
         break;
       case 'z': // / button
-        divideButton();
+        operator = "divide";
+        operatorButton();
         break;
       case 'x': // decimal button
         decimalButton();
