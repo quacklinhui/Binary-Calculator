@@ -39,64 +39,6 @@ void draw(){
   }
 }
 
-//shows the display of the updated value
-void display() {
-  fill(0);
-  rotate(PI/2);
-  translate(-500,-500);
-  if (decimalPoint == false && decimalValue==0){
-    //calculator main display
-    textSize(60);
-    text(value, 125, 200);
-    if (operator != null){
-      //operation display
-      if (operator == "plus"){
-        textSize(40);
-        text("+", 425, 140);
-      } else if (operator == "minus"){
-        textSize(40);
-        text("-", 428, 140);
-      } else if (operator == "times"){
-        textSize(40);
-        text("x", 428, 140);
-      } else if (operator == "divide") {
-        textSize(40);
-        text("/", 428, 140);
-      } else if (operator == "power") {
-        textSize(30);
-        text("^2", 420, 140);
-      } else if (operator == "root") {
-        textSize(30);
-        text("^0.5", 420, 140);
-      }
-    }
-  }
-  else { //if it is a positive number with decimal place
-    stringValue= Integer.toString(value)+"."+Integer.toString(decimalValue);
-    text(stringValue, 125, 200);
-    if (operator != null) {
-      if (operator == "plus"){
-        textSize(40);
-        text("+", 420, 140);
-      } else if (operator == "minus"){
-        textSize(40);
-        text("-", 420, 140);
-      } else if (operator == "times"){
-        textSize(40);
-        text("x", 420, 140);
-      } else if (operator == "divide") {
-        textSize(40);
-        text("/", 420, 140);
-      } else if (operator == "power") {
-        textSize(30);
-        text("^2", 420, 140);
-      } else if (operator == "root") {
-        textSize(30);
-        text("^0.5", 420, 140);
-      }
-    }
-  }
-}    
 
 //performs functions on mouse click
 void mouseClicked(){
@@ -185,113 +127,6 @@ int convertBase10(int binary){
     return decimal;  
 }
 
-//adds numbers
-void plusOperator(){
-  decimalPoint = false;
-  base10Sum += convertBase10(value);
-  decimalbase10Sum += decimalPlaceBinaryToBase10(decimalValue);
-  if (decimalbase10Sum>1){
-    base10Sum++;
-    decimalbase10Sum-=1;
-  }
-  value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-  decimalPlaceBase10toBinary(decimalbase10Sum);
-}
-
-//substracts numbers
-void minusOperator(){
-    decimalPoint = false;
-    base10Sum -= convertBase10(value);
-    value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-}
-
-//divides numbers
-void divideOperator(){
-   decimalPoint = false;
-   base10Sum /= convertBase10(value);
-   value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-}
-
-//product of numbers
-void timesOperator(){
-    decimalPoint = false;
-    base10Sum *= convertBase10(value);
-    value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-}
-
-//power 2 of input value
-void powerOperator(){
-    decimalPoint = false;
-    base10Sum = convertBase10(int(pow(value,2)));
-    value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-}
-
-//square root of input value
-void rootOperator(){
-    decimalPoint = false;
-    base10Sum = convertBase10(int(pow(value,0.5)));
-    value = Integer.parseInt(Integer.toBinaryString(base10Sum));
-}
-
-//updates the value based on which operation was performed
-void equalButton(){
-   switch(operator){
-         case "plus":
-            plusOperator();
-            break;
-         case "minus":
-            minusOperator();
-            break;
-         case "times":
-            timesOperator();
-            break;
-        case "divide":
-            divideOperator();
-            break;
-        case "power":
-            powerOperator();
-            break;
-        case "root":
-            rootOperator();
-            break;
-        default:
-            break;
-        }
-}
-
-//deletes the right most value of the number
-void deleteButton(){
-  if (decimalPoint==false){
-    value=value/10;
-  }
-  else if (decimalValue==0){
-    decimalPoint = false;
-  }
-  else {
-    decimalValue = decimalValue/10;
-  }
-}
-
-//inputs 1
-void oneButton(){
-if (decimalPoint==false){
-   value = value*10+1;
-    }
-    else{
-      decimalValue = decimalValue*10+1;
-    }
-}
-
-//inputs 0
-void zeroButton(){
-  if (decimalPoint==false){
-    value=value*10;
-  }
-  else{
-    decimalValue = decimalValue*10;
-  }
-}
-
 //initialises the values for an addition
 void plusButton(){
   operator = "plus";
@@ -369,7 +204,7 @@ float decimalPlaceBinaryToBase10(int decimalValue){
 }
 
 //converts the fraction from base 10 to binary
-void decimalPlaceBase10toBinary(float decimalBase10Sum){
+int decimalPlaceBase10toBinary(float decimalBase10Sum){
   int stringLength=0;
   String binaryString="";
   float temp = decimalBase10Sum;
@@ -385,5 +220,5 @@ void decimalPlaceBase10toBinary(float decimalBase10Sum){
          stringLength++;
         }
       }
-      decimalValue = Integer.parseInt(binaryString);
+      return decimalValue = Integer.parseInt(binaryString);
 }
