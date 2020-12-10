@@ -56,3 +56,83 @@ void deleteButton(){
     decimalValue = decimalValue/10;
   }
 }
+
+//initialises the values for an multiplication
+void timesButton(){
+      operator = "times";
+      base10Sum = convertBase10(value);
+      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
+      value = 0;
+      decimalValue = 0;
+      decimalPoint=false;
+}
+
+//initialises the values to include a decimal place
+void decimalButton(){
+  if (decimalPoint ==false){
+    decimalPoint=true;
+  }
+  else {
+    decimalPoint = false;
+  } 
+}
+
+void powerButton(){
+    operator = "power";
+    base10Sum = convertBase10(value);
+    //value = 0;
+}
+
+void rootButton(){
+  operator = "root";
+  base10Sum = convertBase10(value);
+  //value = 0;
+}
+
+//initialises the values for an addition
+void plusButton(){
+  operator = "plus";
+  base10Sum = convertBase10(value);
+  decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
+  value = 0;
+  decimalValue = 0;
+  decimalPoint=false;
+  
+}
+
+//initialises the values for a substraction
+void minusButton(){
+      operator = "minus";
+      base10Sum = convertBase10(value);
+      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
+      value = 0;
+      decimalValue = 0;
+      decimalPoint=false;
+}
+
+//initialises the values for an division
+void divideButton(){
+      operator = "divide";
+      base10Sum = convertBase10(value);
+      decimalbase10Sum=decimalPlaceBinaryToBase10(decimalValue);
+      value = 0;
+      decimalValue = 0;
+      decimalPoint=false;
+}
+
+//inputs a binary number and converts it into base 10
+int convertBase10(int binary){  
+    int decimal = 0;  
+    int n = 0;  
+    while(true){  
+      if(binary == 0){  
+        break;  
+      } else {  
+          int temp = binary%10;  
+          decimal += temp*Math.pow(2, n);  
+          binary = binary/10;  
+          n++;  
+       }  
+    }  
+    return decimal;  
+}
