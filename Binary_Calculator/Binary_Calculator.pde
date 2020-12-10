@@ -99,7 +99,7 @@ void display() {
   fill(0);
   rotate(PI/2);
   translate(-500,-500);
-  if (decimalPoint == false){
+  if (decimalPoint == false && decimalValue==0){
     textSize(60);
     text(value, 125, 200);
     if (operator != null){
