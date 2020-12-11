@@ -74,15 +74,3 @@ void decimalButton(){
     decimalPoint = false;
   } 
 }
-
-void powerButton(){
-    operator = "power";
-    base10Sum = convertBase10(value);
-    //value = 0;
-}
-
-void rootButton(){
-  operator = "root";
-  base10Sum = convertBase10(value);
-  //value = 0;
-}

@@ -70,9 +70,11 @@ void mouseClicked(){
     //special functions shift x /
     } else if (mouseButton == RIGHT) {
       if (mouseX>330 && mouseX<430 && mouseY>375 && mouseY<475) { // shift x
-        powerButton();
+        operator = "power";
+        operatorButton();
       } else if (mouseX>80 && mouseX<180 && mouseY>500 && mouseY<600) {// shift /
-        rootButton();
+        operator = "root";
+        operatorButton();
       }
       else if (mouseX>330 && mouseX<430 && mouseY>250 && mouseY<350) {// clear button
         resetAllValues();
