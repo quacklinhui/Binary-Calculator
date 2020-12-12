@@ -119,6 +119,14 @@ void keyReleased(){
       case 'c': // = button
         equalButton();
         break;
+      case 'D': // power 2 button
+        operator="power";
+        operatorButton();
+        break;
+      case 'Z': // root button
+        operator = "root";
+        operatorButton();
+        break;
       default:
         break;
    }
