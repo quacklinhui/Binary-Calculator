@@ -68,10 +68,18 @@ void draw(){
   else {
   value = 0;
   }
+  //hardcoded later then change
   if (one.mouseParameters()) { //if the mouse clicks on "1"
         fill(0,63);
         noStroke();
+        rectMode(CENTER);
         rect(130,300,100,100);
+  }
+  if (zero.mouseParameters()) { //if the mouse clicks on "1"
+        fill(0,63);
+        noStroke();
+        rectMode(CENTER);
+        rect(255,300,100,100);
   }
   
 }
@@ -81,6 +89,8 @@ void draw(){
 void mouseClicked(){
     if (mouseButton == LEFT) {
       if (one.mouseParameters()) { //if the mouse clicks on "1"
+        fill(0);
+        rect(130,300,100,100); //the button will respond when it is clicked
         oneButton();
       } else if(zero.mouseParameters()){ //if the mouse clicks on "0"
         zeroButton();
