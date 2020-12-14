@@ -2,6 +2,8 @@
 *This program is a binary calculator that collects binary number input and outputs the corresponding binary number output.
 *Note that the program only supports addition and substraction for inputs with decimal places
 */
+
+//testing whether this works
 import processing.sound.*;
 SoundFile click;
 
