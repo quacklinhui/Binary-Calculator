@@ -2,6 +2,9 @@
 *This program is a binary calculator that collects binary number input and outputs the corresponding binary number output.
 *Note that the program only supports addition and substraction for inputs with decimal places
 */
+import processing.sound.*;
+SoundFile click;
+
 
 //global variables
 int value = 0;
@@ -57,6 +60,7 @@ void setup(){
   divide= new Button ("/",col1,row3);
   deci= new Button (".",col2,row3);
   equals= new Button ("=",col3,row3);
+  click = new SoundFile(this, "click.wav");
   
 }
 
@@ -92,6 +96,7 @@ void mouseClicked(){
         fill(0);
         rect(130,300,100,100); //the button will respond when it is clicked
         oneButton();
+        click.play();
       } else if(zero.mouseParameters()){ //if the mouse clicks on "0"
         zeroButton();
       } else if (del.mouseParameters()){ //del
