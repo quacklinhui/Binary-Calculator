@@ -23,7 +23,15 @@ class Button {
       textSize(50);
       rect(x, y, w, h, 10);
       fill(255);
+      textFont(calcfont2);
       text(label, x + (w / 2), y + (h / 2));
+      if (label == "1" || label == "0") {
+        textFont(displayfont);
+        text(label, 75, 125);
+      } else if (label != "DEL") {
+        textFont(displayfont);
+        text(label, 425, 100);
+      }
     }
     else {
       fill(black);
@@ -31,7 +39,13 @@ class Button {
       textSize(50);
       rect(x, y, w, h, 10);
       fill(90,85,85);
+      textFont(calcfont2);
       text(label, x + (w / 2), y + (h / 2));
+      if (label == "x" || label == "/") {
+        textSize(20);
+        text("(^2)", 350, 345);
+        text("(^0.5)", 95, 470);
+      }
     }
   }
   
