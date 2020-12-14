@@ -12,6 +12,8 @@ String operator="";
 String stringValue=null;
 boolean decimalPoint = false;
 
+Button one;
+
 //resets all global variables to their initial configuration
 void resetAllValues(){
   value = 0;
@@ -28,6 +30,8 @@ void setup(){
   size(600, 700);
   background(backgroundc);
   //textSize(50);
+  one = new Button ("1", 80,250,100,100);
+  
 }
 
 void draw(){
@@ -44,7 +48,7 @@ void draw(){
 //performs functions on mouse click
 void mouseClicked(){
     if (mouseButton == LEFT) {
-      if (mouseX>80 && mouseX<180 && mouseY>250 && mouseY<350) { //if the mouse clicks on "1"
+      if (one.mouseParameters()) { //if the mouse clicks on "1"
         oneButton();
       } else if(mouseX>205 && mouseX<305 && mouseY>250 && mouseY<350){ //if the mouse clicks on "0"
         zeroButton();
@@ -81,6 +85,43 @@ void mouseClicked(){
       }
     }
 }
+
+public class Button{
+  String label; // button label
+  float x;      // top left corner x position
+  float y;      // top left corner y position
+  float w;      // width of button
+  float h;      // height of button
+  
+  // constructor
+  Button(String labelB, float xpos, float ypos, float widthB, float heightB) {
+    label = labelB;
+    x = xpos;
+    y = ypos;
+    w = widthB;
+    h = heightB;
+  }
+  
+  void Draw() {
+    fill(buttonc);
+    stroke(255);
+    textSize(50);
+    rect(x, y, w, h, 10);
+    textAlign(CENTER, CENTER);
+    fill(0);
+    text(label, x + (w / 2), y + (h / 2));
+  }
+  
+  boolean mouseParameters() {
+    if (mouseX > x && mouseX < (x + w) && mouseY > y && mouseY < (y + h)) {
+      return true;
+    }
+    return false;
+  }
+ }
+
+
+
 
 //triggers the various functions when the corresponding keys are pressed
 void keyReleased(){
