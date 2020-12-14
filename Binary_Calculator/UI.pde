@@ -1,4 +1,4 @@
-//setting different colours of calculator
+//old colours, can delete later
 color backgroundc = color(204, 215, 250);
 color buttonc = color(89, 128, 252);
 color buttontextc = color(255,255,255);
@@ -6,14 +6,21 @@ color shiftc = color(219, 144, 119);
 color displayc = color(232,234,245);
 color calcc = color(225, 225, 229);
 
+//colour scheme blacks, grey, red
+color light = color(184,184,184);
+color red = color(123,1,0);
+color black = color(16,16,16);
+color dark = color(66,66,66);
+color grey = color(88,88,88);
+
 //UI of the calculator
 void calUI(){
   background(backgroundc);
-  fill(calcc);
+  fill(black);
   //size of calculator
   rectMode(CENTER);
   rect(300, 350, 500, 600);
-  fill(displayc);
+  //fill(displayc);
   //calculator display
   rect(300, 150, 400, 150);
   rect(440, 125, 50, 50);

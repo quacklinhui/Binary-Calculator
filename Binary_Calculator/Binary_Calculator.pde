@@ -15,6 +15,10 @@ String operator="";
 String stringValue=null;
 boolean decimalPoint = false;
 
+Button[] examples = new Button[9];
+String[] labels = {"1", "0", "del", "+", "-", "x", "/", ".", "="};
+
+
 Button one;
 Button zero;
 Button del;
@@ -51,6 +55,7 @@ void setup(){
   size(600, 700);
   background(backgroundc);
   //textSize(50);
+  smooth();
   one = new Button ("1", col1,row1);
   zero = new Button ("0", col2,row1);
   del = new Button ("del",col3,row1);
@@ -75,8 +80,8 @@ void draw(){
   //hardcoded later then change
   if (one.mouseParameters()) { //if the mouse clicks on "1"
         fill(0,63);
-        noStroke();
         rectMode(CENTER);
+        noStroke();
         rect(130,300,100,100);
   }
   if (zero.mouseParameters()) { //if the mouse clicks on "1"
@@ -96,7 +101,7 @@ void mouseClicked(){
         fill(0);
         rect(130,300,100,100); //the button will respond when it is clicked
         oneButton();
-        click.play();
+        
       } else if(zero.mouseParameters()){ //if the mouse clicks on "0"
         zeroButton();
       } else if (del.mouseParameters()){ //del
@@ -132,46 +137,6 @@ void mouseClicked(){
       }
     }
 }
-
-public class Button{
-  String label; // button label
-  float x;      // top left corner x position
-  float y;      // top left corner y position
-  float w;      // width of button
-  float h;      // height of button
-  float bx;
-  float by;
-  
-  // constructor
-  Button(String labelB, float xpos, float ypos) {
-    label = labelB;
-    x = xpos;
-    y = ypos;
-    w = 100;
-    h = 100;
-    bx=x+w;
-    by=y+h;
-  }
-  
-  //void Draw() {
-  //  fill(buttonc);
-  //  stroke(255);
-  //  textSize(50);
-  //  rect(x, y, w, h, 10);
-  //  textAlign(CENTER, CENTER);
-  //  fill(0);
-  //  text(label, x + (w / 2), y + (h / 2));
-  //}
-  
-  boolean mouseParameters() {
-    if (mouseX > x && mouseX < (x + w) && mouseY > y && mouseY < (y + h)) {
-      return true;
-    }
-    return false;
-  }
- }
-
-
 
 
 //triggers the various functions when the corresponding keys are pressed

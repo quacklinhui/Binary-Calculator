@@ -1,6 +1,6 @@
 //shows the display of the updated value
 void display() {
-  fill(0);
+  fill(255);
   rotate(PI/2);
   translate(-500,-500);
   if (decimalPoint == false && decimalValue==0){

@@ -1,5 +1,6 @@
 //inputs 1
 void oneButton(){
+  click.play();
 if (decimalPoint==false){
    value = value*10+1;
     }
